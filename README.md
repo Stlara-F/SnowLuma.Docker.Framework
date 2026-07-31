@@ -105,7 +105,7 @@ services:
       SNOWLUMA_LOG_LEVEL: debug
       SNOWLUMA_SCREEN: 1920x1080x24
       SNOWLUMA_HOOK_AUTOLOAD: 1
-      SNOWLUMA_EXTRA_QQ_HOMES: /app/qq-acct2,/app/qq-acct3
+      SNOWLUMA_EXTRA_QQ_HOMES: /app/qq-acct2,/app/qq-acct3 # 增加存储卷可无限续杯
       SNOWLUMA_QQ_FLAGS: "--disable-gpu --disable-software-rasterizer --disable-gpu-compositing"
     ports:
       - "16081:6081"
