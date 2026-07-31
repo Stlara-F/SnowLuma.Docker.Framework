@@ -22,7 +22,7 @@ http://<server-ip>:9000/
 http://<server-ip>:9000/#!/3/docker/templates/custom/new
 
 ```
-## All In One
+## All In One compose
 ```
 version: '3.8'
 
@@ -305,18 +305,18 @@ networks:
 
 #### 使用方法
  1. 安装依赖：`apt install jq`
- 2. 保存脚本，`chmod +x`
- 3. 配置 `COMPOSE_DIR`，可选 `LOG_FILE`
+ 2. 创建目录、保存脚本、赋予执行权限，`mkdir /path/to/composes`，`nano /path/to/composes/update-compose.sh`，`chmod +x /path/to/composes/update-compose.sh`
+ 3. 在**update-compose.sh**中配置 `COMPOSE_DIR`，可选 `LOG_FILE`等参数
  4. 测试：`./update-compose.sh --dry-run`
- 5. 加入 crontab：`*/45 * * * * /path/to/update-compose.sh`
-#
+ 5. 加入 crontab：`crontab -e`，末尾添加一行`*/45 * * * * /path/to/update-compose.sh`
+ #### update-compose.sh
 ```bash
 #!/usr/bin/env bash
 set -Eeuo pipefail
 IFS=$'\n\t'
 
-COMPOSE_DIR="/opt/composes"                          # compose文件路径
-SERVICE_NAME=""                                      # 更新容器名 （空=全部）
+COMPOSE_DIR="/opt/composes"                          # 可自定义compose文件路径
+SERVICE_NAME=""                                      # 需要更新的容器名 （空=全部）
 LOG_FILE="/opt/composes/update.log"                  # 保存日志路径 （空=仅终端）
 MAX_RETRIES=10                                       # Pull 重试次数
 BASE_DELAY=5                                         # 基础延迟（秒），指数增长
